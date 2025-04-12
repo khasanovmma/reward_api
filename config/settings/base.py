@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 import environ
-from split_settings.tools import include, optional
+from split_settings.tools import include
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -17,5 +17,4 @@ include(
     "components/i18n.py",
     "components/media.py",
     "components/security.py",
-    optional("local.py"),
 )
