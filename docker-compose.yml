@@ -1,0 +1,46 @@
+x-common: &common-settings
+  build:
+    context: .
+    dockerfile: Dockerfile
+    args:
+        ENV_FILE: env
+        ENTRYPOINT_FILE: entrypoint.sh
+  env_file: ./deployment/environment/env
+  environment:
+    - DJANGO_SETTINGS_MODULE=config.settings
+services:
+  web:
+    <<: *common-settings
+    ports:
+      - 8080:8000
+    depends_on:
+      - "db"
+  cache:
+    image: redis:latest
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  celery_worker:
+    <<: *common-settings
+    restart: always
+    command: celery -A config worker -l info
+    depends_on:
+      - "web"
+
+  db:
+    image: postgres:13
+    env_file:
+      - ./deployment/environment/env
+    volumes:
+      - "db_data:/var/lib/postgresql/data"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+volumes:
+  db_data:
