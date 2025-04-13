@@ -15,7 +15,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-LOCAL_APPS = []
+LOCAL_APPS = ["account.apps.AccountConfig"]
 
 THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "corsheaders"]
 

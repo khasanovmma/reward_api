@@ -18,3 +18,5 @@ include(
     "components/media.py",
     "components/security.py",
 )
+
+AUTH_USER_MODEL = "account.User"
