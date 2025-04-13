@@ -20,7 +20,12 @@ LOCAL_APPS = [
     "rewards.apps.RewardsConfig",
 ]
 
-THIRD_PARTY_APPS = ["rest_framework", "rest_framework_simplejwt", "corsheaders"]
+THIRD_PARTY_APPS = [
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "corsheaders",
+    "drf_spectacular",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
