@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import RewardLog, ScheduledReward
+from rewards.models import RewardLog, ScheduledReward
 
 
 @admin.register(ScheduledReward)
